@@ -1,28 +1,29 @@
-﻿using ReservationsProject.Interfaces;
+﻿using ReservationsProject.Database;
+using ReservationsProject.Interfaces;
 using ReservationsProject.Models.Entities;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace ReservationsProject.Services
-{
+{    
     public class UserService : IUserService
     {
-        public UserService()
+        ReservationDBContext _context;
+        public UserService(ReservationDBContext context)
         {
-
+            _context = context;
         }
         
         public User GetUserByID(int userID)
         {
-            //var user = this._context.Users.Where(x => x.UserID == userID).FirstOrDefault();
-            var user = new User();
+            var user = this._context.Users.Where(x => x.UserID == userID).FirstOrDefault();            
             return user;
         }
 
         public bool CreateNewUser(User user)
         {
-            //var newUser = this._context.Users.Where(x => x.UserID == user.UserID).FirstOrDefault();
-            var newUser = new User();
+            var newUser = this._context.Users.Where(x => x.UserID == user.UserID).FirstOrDefault();            
 
             if (newUser == null)
             {
@@ -47,9 +48,8 @@ namespace ReservationsProject.Services
 
         public bool EditUser(User newUser)
         {
-            //var user = this._context.Users.Where(x => x.UserID == newUser.UserID).FirstOrDefault();
-            var user = new User();
-
+            var user = this._context.Users.Where(x => x.UserID == newUser.UserID).FirstOrDefault();
+            
             user = new User();
             user.UserID = newUser.UserID;
             user.Name = newUser.Name;
@@ -65,9 +65,8 @@ namespace ReservationsProject.Services
 
         public bool DeleteUser(int userID)
         {
-            //var user = this._context.Users.Where(x => x.UserID == user.userID).FirstOrDefault();            
-            var user = new User();
-
+            var user = this._context.Users.Where(x => x.UserID == user.userID).FirstOrDefault();            
+            
             user.DeleteDate = DateTime.UtcNow;
                         
             return true;

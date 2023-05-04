@@ -9,7 +9,7 @@ namespace ReservationsProject.Models.Validator
 {
     public class ReservationValidator
     {
-        public List<string> Validate(ContextDB contextDB, ReservationRequest request)
+        public List<string> Validate(ReservationRequest request)
         {
             var errorsList = new List<string>();
             
@@ -17,8 +17,7 @@ namespace ReservationsProject.Models.Validator
             
             ValidateBuildingAvailability(request.reservation);
 
-            ValidateFurnituresAvailability(request);
-            
+            ValidateFurnituresAvailability(request);            
 
             return errorsList;
         }

@@ -23,7 +23,7 @@ namespace ReservationsProject.Services
             var reservation = request.reservation;
             var furnituresList = request.FurnituresList;
 
-            var validationErrors = ReservationValidator.Validate(contextDb, request);
+            var validationErrors = ReservationValidator.Validate(request);
 
             if (validationErrors.Any())
             {
