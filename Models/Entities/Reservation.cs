@@ -4,9 +4,9 @@ namespace ReservationsProject.Models.Entities
 {
     public class Reservation
     {
-        public int ReservationID { get; set; }
-        public int BuildingID { get; set; }                
-        public int ClientID { get; set; }
+        public Guid ReservationID { get; set; }
+        public Guid BuildingID { get; set; }                
+        public Guid ClientID { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }

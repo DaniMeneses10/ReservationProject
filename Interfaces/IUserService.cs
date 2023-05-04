@@ -1,12 +1,13 @@
 ﻿using ReservationsProject.Models.Entities;
+using System;
 
 namespace ReservationsProject.Interfaces
 {
     public interface IUserService
     {
-        User GetUserByID(int userID);
+        User GetUserByID(Guid userID);
         bool CreateNewUser(User user);
         bool EditUser(User user);
-        bool DeleteUser(int userID);
+        bool DeleteUser(Guid userID);
     }
 }

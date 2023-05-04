@@ -1,9 +1,11 @@
-﻿namespace ReservationsProject.Models.Entities
+﻿using System;
+
+namespace ReservationsProject.Models.Entities
 {
-    public class Buildings
+    public class Building
     {
-        public int BuildingID { get; set; }
-        public int OwnerID { get; set; }
+        public Guid BuildingID { get; set; }
+        public Guid OwnerID { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
         public int Capacity { get; set; }

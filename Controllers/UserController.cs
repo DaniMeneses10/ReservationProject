@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ReservationsProject.Interfaces;
 using ReservationsProject.Models.Entities;
+using System;
 
 namespace ReservationsProject.Controllers
 {
@@ -15,7 +16,7 @@ namespace ReservationsProject.Controllers
 
         [HttpGet]
         [Route("GetUserByID")]
-        public ActionResult<User>GetUserByID(int userID)
+        public ActionResult<User>GetUserByID(Guid userID)
         {
             return this._userservice.GetUserByID(userID);
         }
@@ -36,7 +37,7 @@ namespace ReservationsProject.Controllers
 
         [HttpDelete]
         [Route("DeleteUser")]
-        public ActionResult<bool>DeleteUser(int userID)
+        public ActionResult<bool>DeleteUser(Guid userID)
         {
             return this._userservice.DeleteUser(userID);
         }

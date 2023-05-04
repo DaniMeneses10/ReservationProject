@@ -15,7 +15,7 @@ namespace ReservationsProject.Services
             _context = context;
         }
         
-        public User GetUserByID(int userID)
+        public User GetUserByID(Guid userID)
         {
             var user = this._context.Users.Where(x => x.UserID == userID).FirstOrDefault();            
             return user;
@@ -28,7 +28,7 @@ namespace ReservationsProject.Services
             if (newUser == null)
             {
                 newUser = new User();
-                newUser.UserID = user.UserID;
+                newUser.UserID = Guid.NewGuid();
                 newUser.Name = user.Name; 
                 newUser.Email = user.Email;
                 newUser.Cellphone = user.Cellphone;
@@ -63,9 +63,9 @@ namespace ReservationsProject.Services
             return true;
         }
 
-        public bool DeleteUser(int userID)
+        public bool DeleteUser(Guid userID)
         {
-            var user = this._context.Users.Where(x => x.UserID == user.userID).FirstOrDefault();            
+            var user = this._context.Users.Where(x => x.UserID == userID).FirstOrDefault();            
             
             user.DeleteDate = DateTime.UtcNow;
                         

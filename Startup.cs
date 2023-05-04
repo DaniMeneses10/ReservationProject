@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ReservationsProject.Database;
 using ReservationsProject.Interfaces;
+using ReservationsProject.Models.Validator;
 using ReservationsProject.Services;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace ReservationsProject
             services.AddDbContext<ReservationDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient, ServiceLifetime.Transient);
 
             services.AddTransient<IUserService, UserService>();
-
+            services.AddTransient<IReservationValidator, ReservationValidator>();
 
             services.AddControllers();
             AddSwagger(services);

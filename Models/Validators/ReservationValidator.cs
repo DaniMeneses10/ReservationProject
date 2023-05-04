@@ -4,11 +4,19 @@ using System;
 using System.Collections.Generic;
 using static ReservationsProject.Common.Constants;
 using System.ComponentModel.DataAnnotations;
+using ReservationsProject.Database;
+using ReservationsProject.Interfaces;
+using System.Linq;
 
 namespace ReservationsProject.Models.Validator
 {
-    public class ReservationValidator
+    public class ReservationValidator : IReservationValidator
     {
+        ReservationDBContext _context;        
+        public ReservationValidator(ReservationDBContext context)
+        {            
+            _context = context;
+        }
         public List<string> Validate(ReservationRequest request)
         {
             var errorsList = new List<string>();
@@ -22,11 +30,10 @@ namespace ReservationsProject.Models.Validator
             return errorsList;
         }
 
-        public bool ValidateUser(int userID)
+        public bool ValidateUser(Guid userID)
         {
-            //var user = this._context.Users.Where(x => x.UserID == user.UserID).FirstOrDefault();
-            var user = new User();
-
+            var user = this._context.Users.Where(x => x.UserID == userID).FirstOrDefault();
+            
             var today = DateTime.Today;
             var age = today.Year - user.BirthDate.Year;
 
@@ -41,7 +48,7 @@ namespace ReservationsProject.Models.Validator
 
         public bool ValidateBuildingAvailability(Reservation reservation)
         {
-            var reservations = this._context.Reservations.Where(x => x.Evendate == reservation.EventDate
+            var reservations = this._context.Reservations.Where(x => x.EventDate == reservation.EventDate
                                                                     && x.StartTime == reservation.StartTime
                                                                     && x.EndTime == reservation.EndTime
                                                                     && x.BuildingID == reservation.BuildingID).ToList();
