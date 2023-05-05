@@ -8,8 +8,8 @@ namespace ReservationsProject.Interfaces
     public interface IReservationValidator
     {
         List<string> Validate(ReservationRequest request);
-        bool ValidateUser(Guid userID);
-        bool ValidateBuildingAvailability(Reservation reservation);
-        bool ValidateFurnituresAvailability(ReservationRequest request);
+        string ValidateUser(Guid userID);
+        string ValidateBuildingAvailability(Reservation reservation);
+        string ValidateFurnituresAvailability(ReservationRequest request);
     }
 }

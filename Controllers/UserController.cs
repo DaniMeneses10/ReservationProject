@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ReservationsProject.Interfaces;
 using ReservationsProject.Models.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace ReservationsProject.Controllers
 {
@@ -12,6 +13,13 @@ namespace ReservationsProject.Controllers
         public UserController(IUserService userService)
         {
             _userservice = userService;
+        }
+
+        [HttpGet]
+        [Route("GetAllUsers")]
+        public ActionResult<List<User>> GetAllUsers()
+        {
+            return this._userservice.GetAllUsers();
         }
 
         [HttpGet]

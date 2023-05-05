@@ -68,3 +68,4 @@ C:\Proyects\ReservationsProject\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\
 C:\Proyects\ReservationsProject\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Proyects\ReservationsProject\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Proyects\ReservationsProject\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Proyects\ReservationsProject\bin\Debug\netcoreapp3.1\SQLQueries\ReservationProject.postman_collection.json

@@ -36,6 +36,7 @@ namespace ReservationsProject
             services.AddDbContext<ReservationDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient, ServiceLifetime.Transient);
 
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IReservationService, ReservationService>();
             services.AddTransient<IReservationValidator, ReservationValidator>();
 
             services.AddControllers();

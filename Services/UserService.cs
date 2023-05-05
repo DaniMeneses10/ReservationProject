@@ -2,6 +2,7 @@
 using ReservationsProject.Interfaces;
 using ReservationsProject.Models.Entities;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -14,7 +15,12 @@ namespace ReservationsProject.Services
         {
             _context = context;
         }
-        
+
+        public List<User> GetAllUsers()
+        {
+            var users = this._context.Users.ToList();
+            return users;
+        }
         public User GetUserByID(Guid userID)
         {
             var user = this._context.Users.Where(x => x.UserID == userID).FirstOrDefault();            
@@ -71,7 +77,5 @@ namespace ReservationsProject.Services
                         
             return true;
         }
-
-
     }
 }

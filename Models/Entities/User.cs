@@ -9,10 +9,10 @@ namespace ReservationsProject.Models.Entities
         public string Email { get; set; }
         public string Cellphone { get; set; }
         public string Type { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         public string Status { get; set; }
-        public bool IsHost { get; set; }
-        public DateTime DeleteDate { get; set; }
-        public DateTime CreateDate { get; set; }
+        public bool? IsHost { get; set; }
+        public DateTime? DeleteDate { get; set; }
+        public DateTime? CreateDate { get; set; }
     }
 }

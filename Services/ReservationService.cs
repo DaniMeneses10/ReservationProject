@@ -11,16 +11,13 @@ using static ReservationsProject.Common.Constants;
 
 namespace ReservationsProject.Services
 {
-    public class ReservationService
+    public class ReservationService : IReservationService
     {
-        ReservationDBContext _context;
-        IUserService _userservice;
+        ReservationDBContext _context;        
         IReservationValidator _reservationValidator;
-        public ReservationService(ReservationDBContext context, 
-                                    IUserService userService,
+        public ReservationService(ReservationDBContext context,                                     
                                     IReservationValidator reservationValidator)
-        {
-            _userservice = userService;
+        {            
             _context = context;
             _reservationValidator = reservationValidator;
         }
@@ -32,7 +29,7 @@ namespace ReservationsProject.Services
 
             var validationErrors = _reservationValidator.Validate(request);
 
-            if (validationErrors.Any())
+            if (validationErrors == null)
             {
                 return new ReservationResponse { IsSuccessful = false, Errors = validationErrors };
             }
@@ -46,6 +43,12 @@ namespace ReservationsProject.Services
             newReservation.EventDate = reservation.EventDate;
             newReservation.StartTime = reservation.StartTime;
             newReservation.EndTime = reservation.EndTime;
+
+            TimeSpan difference = reservation.EndTime - reservation.StartTime;
+            reservation.TotalHours = (int)difference.TotalHours;
+            newReservation.TotalHours = reservation.TotalHours;
+
+            newReservation.EventType = reservation.EventType;
                         
             double sumTotalFurnituresValues = furnituresList.Sum(x => x.HourlyRate);
 
@@ -55,11 +58,9 @@ namespace ReservationsProject.Services
             
             foreach(var item in furnituresList)
             {
-                item.IsAvailable = false;
-
                 var newReservationFurniture = new ReservationFurniture();
                 newReservationFurniture.ReservationFurnitureID = Guid.NewGuid();
-                newReservationFurniture.ReservationID = reservation.ReservationID;
+                newReservationFurniture.ReservationID = newReservation.ReservationID;
                 newReservationFurniture.FurnitureID = item.FurnitureID;
 
                 _context.ReservationsFurnitures.Add(newReservationFurniture);
@@ -72,7 +73,8 @@ namespace ReservationsProject.Services
 
         public double CalculateTotalPrice(double sumFurnitures, Reservation reservation, Building building)
         {
-            var TotalPrice = sumFurnitures * reservation.TotalHours + building.HourlyRate * reservation.TotalHours;
+            double TotalPrice = sumFurnitures * reservation.TotalHours + (double)building.HourlyRate * reservation.TotalHours;
+                        
             return TotalPrice;
         }
     }
